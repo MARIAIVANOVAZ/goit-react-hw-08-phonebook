@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import contactsOperations from '../redux/contacts/contactsOperations';
 // import {
 //   useGetContactsQuery,
 //   useAddContactMutation,
 // } from 'components/redux/contactsApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // import { addContacts } from '../redux/valueSlice';
 
@@ -15,12 +15,6 @@ export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const data = useSelector(state => state.contacts.contacts);
-  // const { data } = useGetContactsQuery();
-
-  // console.log(data);
-  // const [addContact] = useAddContactMutation();
-  // const dispatch = useDispatch();
-  // const contacts = useSelector(state => state.contacts.contacts);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -51,24 +45,12 @@ export default function ContactForm() {
 
     if (doubleContact) {
       toast.error(`${doubleContact.name} is already in contacts`);
-
+      // alert(`${doubleContact.name} is already in contacts`);
       return;
     } else {
       dispatch(contactsOperations.addContact({ name, number }));
-      toast.success('contact was added');
+      toast.error('contact was added!');
     }
-
-    // contacts.find(contact =>
-    //   contact.name
-    //     .toLowerCase()
-    //     .includes(e.currentTarget.elements.name.value.toLowerCase())
-    //     ? alert(` is already in contacts`)
-    //     : dispatch(addContacts({ name, number }))
-    // );
-
-    // dispatch(addContacts({ name, number }));
-
-    // console.log(e.currentTarget.elements.name.value);
 
     reset();
   };

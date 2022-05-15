@@ -24,16 +24,19 @@ const getContacts = createAsyncThunk('contacts/get', async credentials => {
   }
 });
 
-const deleteContact = createAsyncThunk('contacts/delete', async id => {
-  try {
-    const { data } = await axios.delete(`contacts/${id}`);
+const deleteContact = createAsyncThunk(
+  'contacts/delete',
+  async (id, { dispatch }) => {
+    try {
+      const { data } = await axios.delete(`contacts/${id}`);
 
-    // dispatch(deleteContact(id));
-    console.log(data);
-  } catch (error) {
-    console.log(error.message);
+      dispatch(getContacts());
+      console.log(data);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
-});
+);
 
 const operations = {
   addContact,
