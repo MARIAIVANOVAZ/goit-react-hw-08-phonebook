@@ -3,23 +3,51 @@ import PropTypes from 'prop-types';
 import contactsOperations from '../redux/contacts/contactsOperations';
 import { useDispatch } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
-// import { useEffect } from 'react';
+import Button from '@mui/material/Button';
 
-// import { deleteContact } from 'components/redux/valueSlice';
+const styles = {
+  item: {
+    listStyle: 'none',
+  },
+  name: {
+    // display: 'flex',
+    // flexDirection: 'column',
+    marginBottom: 15,
+    marginRight: 40,
+    fontWeight: 700,
+    fontSize: 24,
+    color: '#1976d2',
+  },
+  container: {
+    display: 'flex',
+    // flexDirection: 'column',
+  },
+  number: {
+    marginBottom: 15,
+    marginRight: 40,
+    fontWeight: 700,
+    fontSize: 24,
+    color: 'white',
+  },
+  // button: {
+  //   marginLeft: 'auto',
+  //   marginRight: 'auto',
+  //   // display: 'block',
+  // },
+};
 
 const ContactItem = ({ contact: { id, name, number } }) => {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(contactsOperations.getContacts());
-  // }, [dispatch]);
-
-  // const [deleteContact] = useDeleteContactMutation();
   return (
-    <li>
-      <p>{name}:</p>
-      <p>{number}</p>
-      <button
+    <li style={styles.item}>
+      <div style={styles.container}>
+        <p style={styles.name}>{name}:</p>
+        <p style={styles.number}>{number}</p>
+      </div>
+      <Button
+        variant="contained"
+        size="small"
         type="button"
         onClick={() => {
           dispatch(contactsOperations.deleteContact(id));
@@ -27,8 +55,18 @@ const ContactItem = ({ contact: { id, name, number } }) => {
         }}
       >
         Delete
-      </button>
-      <Toaster />;
+      </Button>
+
+      {/* <button
+        type="button"
+        onClick={() => {
+          dispatch(contactsOperations.deleteContact(id));
+          toast.success('contact was deleted');
+        }}
+      >
+        Delete
+      </button> */}
+      <Toaster />
     </li>
   );
 };

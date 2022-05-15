@@ -1,15 +1,27 @@
 import authOperations from 'components/redux/auth/authOperations';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
 
 const styles = {
   form: {
     width: 320,
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   label: {
     display: 'flex',
     flexDirection: 'column',
     marginBottom: 15,
+  },
+  caption: {
+    textAlign: 'center',
+    color: '#1976d2',
+  },
+  button: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block',
   },
 };
 
@@ -37,7 +49,7 @@ export default function LoginPage() {
   };
   return (
     <div>
-      <h1>Login</h1>
+      <h1 style={styles.caption}>Login</h1>
 
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
         <label style={styles.label}>
@@ -59,8 +71,15 @@ export default function LoginPage() {
             onChange={handleChange}
           />
         </label>
-
-        <button type="submit">Send</button>
+        <Button
+          variant="contained"
+          size="small"
+          type="submit"
+          style={styles.button}
+        >
+          LogIn
+        </Button>
+        {/* <button type="submit">Send</button> */}
       </form>
     </div>
   );
