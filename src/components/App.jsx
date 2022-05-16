@@ -48,7 +48,7 @@ export function App() {
                 <LoginPage />
               </PublicRoute>
             }
-          ></Route>
+          />
           <Route
             path="/register"
             element={
@@ -56,11 +56,11 @@ export function App() {
                 <RegisterPage />
               </PublicRoute>
             }
-          ></Route>
+          />
 
           <Route
             exact
-            path="/contacts"
+            path="*"
             element={
               <PrivateRoute path="/contacts" redirectTo="/login">
                 <ContactsPage />

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authOperations from 'components/redux/auth/authOperations';
 import Button from '@mui/material/Button';
+import toast, { Toaster } from 'react-hot-toast';
 
 const styles = {
   form: {
@@ -47,6 +48,10 @@ export default function RegisterPage() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (!name || !email || !password) {
+      toast.error('Enter your data, please!');
+      return;
+    }
     dispatch(authOperations.register({ name, email, password }));
 
     setName('');
@@ -89,6 +94,7 @@ export default function RegisterPage() {
         >
           Sign Up
         </Button>
+        <Toaster />
         {/* <button type="submit">Sigh up</button> */}
       </form>
     </div>

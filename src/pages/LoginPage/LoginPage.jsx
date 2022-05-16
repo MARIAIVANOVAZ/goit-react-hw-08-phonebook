@@ -2,6 +2,7 @@ import authOperations from 'components/redux/auth/authOperations';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
+import toast, { Toaster } from 'react-hot-toast';
 
 const styles = {
   form: {
@@ -43,6 +44,10 @@ export default function LoginPage() {
   };
   const handleSubmit = e => {
     e.preventDefault();
+    if (!email || !password) {
+      toast.error('Enter your data, please!');
+      return;
+    }
     dispatch(authOperations.logIn({ email, password }));
     setEmail('');
     setPassword('');
@@ -61,7 +66,6 @@ export default function LoginPage() {
             onChange={handleChange}
           />
         </label>
-
         <label style={styles.label}>
           Password
           <input
@@ -80,6 +84,7 @@ export default function LoginPage() {
           LogIn
         </Button>
         {/* <button type="submit">Send</button> */}
+        <Toaster />
       </form>
     </div>
   );
